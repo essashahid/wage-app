@@ -34,6 +34,11 @@ Tip: You can record quick GIFs with tools like Kap (macOS) or ScreenToGif (Windo
 
 </details>
 
+### Interactive 3D (Optional)
+Try an interactive 3D “stitching unit” scene right in your browser.
+
+[▶️ Open 3D Demo](docs/3d/index.html)
+
 ## Features
 - Multiple workers: Add/remove workers dynamically.
 - Regular vs Overtime: Auto-splits up to 8 hours as regular; rest as overtime.
