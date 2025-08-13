@@ -24,8 +24,7 @@ Embed a short looping animation directly in the README. Add one (or both) files 
   <img src="docs/gifs/stitching-3d.gif" alt="3D stitching unit animation" />
 </picture>
 
-<!-- Prefer HTML5 video for autoplay (muted required); GitHub may not always autoplay videos in README. -->
-<video src="docs/3d/stitching-3d.mp4" autoplay loop muted playsinline style="width:100%; border-radius:12px;" />
+<!-- HTML5 video often doesn't autoplay on GitHub READMEs; relying on GIF above for inline motion. -->
 
 ## Stitching Unit Workflow (Animated Tour)
 
