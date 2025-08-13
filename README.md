@@ -1,34 +1,36 @@
 <div align="center">
 
-<img src="docs/logo.svg" width="128" height="128" alt="Tailor Beard Logo" />
+<img src="docs/logo.svg" width="128" height="128" alt="Workshop Logo" />
 
-# 🪡 Wage Calculator — A Tailor's Day at the Shop
+# 🧵 Wage Calculator — Stitching Unit Edition
 
-Calculate daily wages with regular and overtime hours across multiple platforms — told through the story of a tailor. ✂️🧵💸
+Calculate daily wages for a team of garment workers — regular and overtime across platforms. ✂️🪡👷🏽‍♂️👷🏾‍♀️
 
 </div>
 
 ## Overview
-Wage Calculator helps you compute daily pay for one or more workers by splitting time into regular hours (up to 8/day) and overtime, supporting overnight shifts and locale-aware currency formatting.
+Wage Calculator helps stitching units compute daily pay for one or more workers by splitting time into regular hours (up to 8/day) and overtime, supporting night shifts and locale-aware currency formatting.
 
-## Tailor's Workflow (Animated Tour)
+<img src="docs/hero-unit.svg" alt="Stitching unit banner" />
+
+## Stitching Unit Workflow (Animated Tour)
 
 Bring the story to life. Drop GIFs into `docs/gifs/` with the suggested names below and they’ll render here.
 
 | Scene | What happens | Demo |
 |---|---|---|
-| 1. Taking measurements | Set start and end times for the workday | ![Pick time](docs/gifs/select-time.gif)
-| 2. Setting the rate | Enter the regular rate and overtime multiplier | ![Type rate](docs/gifs/type-rate.gif)
-| 3. Adding apprentices | Add/remove multiple workers | ![Add workers](docs/gifs/add-workers.gif)
-| 4. Late-night stitching | Handle overnight shifts seamlessly | ![Overnight shift](docs/gifs/overnight.gif)
-| 5. Collecting payment | See totals with currency formatting | ![Results](docs/gifs/results.gif)
+| 1. Clock-in/Clock-out | Set start and end times for the shift | ![Pick time](docs/gifs/select-time.gif)
+| 2. Set wage rules | Enter the regular rate and overtime multiplier | ![Type rate](docs/gifs/type-rate.gif)
+| 3. Manage staff | Add/remove multiple workers | ![Add workers](docs/gifs/add-workers.gif)
+| 4. Night shift | Handle overnight shifts seamlessly | ![Overnight shift](docs/gifs/overnight.gif)
+| 5. Payout | See totals with currency formatting | ![Results](docs/gifs/results.gif)
 
 Tip: You can record quick GIFs with tools like Kap (macOS) or ScreenToGif (Windows) and place them in `docs/gifs/`.
 
 <details>
 <summary>Alternate compact storyboard</summary>
 
-1) 🕘 Start/end time → 2) 💵 Rate/multiplier → 3) ➕ Add workers → 4) 🌙 Overnight → 5) ✅ Total wages
+1) 🕘 Clock-in/out → 2) 💵 Rate/multiplier → 3) 👥 Staff → 4) 🌙 Night shift → 5) ✅ Payout
 
 </details>
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Stitching Unit Hero</title>
+  <desc id="desc">A wide banner illustration of multiple garment workers sewing at machines with threads forming waves.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6C63FF"/>
+      <stop offset="1" stop-color="#00C2FF"/>
+    </linearGradient>
+    <style>
+      .worker { fill: #E2E8F0; }
+      .machine { fill: #94A3B8; }
+      .desk { fill: #1F2937; }
+      .thread { stroke: url(#accent); stroke-width: 3; fill: none; opacity: .9; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg)"/>
+
+  <!-- flowing thread lines -->
+  <path class="thread" d="M0,260 C150,220 220,320 360,280 C520,230 620,330 780,280 C920,240 1020,320 1200,280"/>
+  <path class="thread" d="M0,300 C160,260 260,340 420,300 C560,260 680,340 860,300 C1000,260 1080,340 1200,300" opacity="0.6"/>
+
+  <!-- desks -->
+  <rect class="desk" x="140" y="230" width="220" height="16" rx="4"/>
+  <rect class="desk" x="490" y="230" width="220" height="16" rx="4"/>
+  <rect class="desk" x="840" y="230" width="220" height="16" rx="4"/>
+
+  <!-- sewing machines -->
+  <g transform="translate(160,190)">
+    <rect class="machine" x="0" y="0" width="120" height="40" rx="6"/>
+    <rect class="machine" x="100" y="10" width="16" height="20" rx="3"/>
+    <circle cx="26" cy="20" r="6" fill="#CBD5E1"/>
+  </g>
+  <g transform="translate(510,190)">
+    <rect class="machine" x="0" y="0" width="120" height="40" rx="6"/>
+    <rect class="machine" x="100" y="10" width="16" height="20" rx="3"/>
+    <circle cx="26" cy="20" r="6" fill="#CBD5E1"/>
+  </g>
+  <g transform="translate(860,190)">
+    <rect class="machine" x="0" y="0" width="120" height="40" rx="6"/>
+    <rect class="machine" x="100" y="10" width="16" height="20" rx="3"/>
+    <circle cx="26" cy="20" r="6" fill="#CBD5E1"/>
+  </g>
+
+  <!-- workers (heads + torsos) -->
+  <g transform="translate(210,150)">
+    <circle class="worker" cx="0" cy="0" r="20"/>
+    <rect class="worker" x="-18" y="18" width="36" height="30" rx="8"/>
+    <path d="M-6 48 L 6 48 L 6 70 L -6 70 Z" fill="#64748B"/>
+  </g>
+  <g transform="translate(560,150)">
+    <circle class="worker" cx="0" cy="0" r="20"/>
+    <rect class="worker" x="-18" y="18" width="36" height="30" rx="8"/>
+    <path d="M-6 48 L 6 48 L 6 70 L -6 70 Z" fill="#64748B"/>
+  </g>
+  <g transform="translate(910,150)">
+    <circle class="worker" cx="0" cy="0" r="20"/>
+    <rect class="worker" x="-18" y="18" width="36" height="30" rx="8"/>
+    <path d="M-6 48 L 6 48 L 6 70 L -6 70 Z" fill="#64748B"/>
+  </g>
+
+  <!-- subtle title overlay -->
+  <text x="60" y="80" fill="#E2E8F0" font-family="system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial" font-weight="700" font-size="36">Stitching Unit Wage Calculator</text>
+  <text x="60" y="110" fill="#94A3B8" font-family="system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial" font-size="18">Compute daily wages for garment workers — regular hours and overtime, with night shifts.</text>
+</svg>
+
+
