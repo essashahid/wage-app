@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'models/worker.dart';
+import 'widgets/worker_input_card.dart';
+import 'utils/calculation.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,9 +22,18 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Wage Calculator'),
+          title: Builder(
+            builder: (context) => Text(AppLocalizations.of(context)!.appTitle),
+          ),
         ),
         body: const WageCalculator(),
       ),
@@ -27,25 +41,7 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class Worker {
-  TimeOfDay startTime;
-  TimeOfDay endTime;
-  double regularRate;
-  double regularHours; // Changed to double
-  double overtimeHours; // Changed to double
-  double overtimeRate;
-  double totalWage;
-
-  Worker({
-    required this.startTime,
-    required this.endTime,
-    this.regularRate = 125.0,
-    this.regularHours = 0.0, // Changed to double
-    this.overtimeHours = 0.0, // Changed to double
-    this.overtimeRate = 1.5,
-    this.totalWage = 0.0,
-  });
-}
+// Worker model moved to models/worker.dart
 
 class _WageCalculatorState extends State<WageCalculator> {
   List<Worker> workers = [
@@ -55,32 +51,7 @@ class _WageCalculatorState extends State<WageCalculator> {
     )
   ];
 
-  void _calculateHours(int index) {
-    final worker = workers[index];
-    final start = worker.startTime;
-    final end = worker.endTime;
-
-    final startMinutes = start.hour * 60 + start.minute;
-    final endMinutes = end.hour * 60 + end.minute;
-    final totalMinutes = endMinutes - startMinutes;
-
-    // Calculate regular hours (up to 8 hours) and overtime hours (any time beyond 8 hours)
-    if (totalMinutes <= 480) {
-      // 8 hours or less
-      worker.regularHours = totalMinutes / 60.0;
-      worker.overtimeHours = 0;
-    } else {
-      // More than 8 hours
-      worker.regularHours = 8.0;
-      worker.overtimeHours = (totalMinutes - 480) / 60.0;
-    }
-
-    // Calculate the total wage
-    setState(() {
-      worker.totalWage = (worker.regularRate * worker.regularHours) +
-          (worker.regularRate * worker.overtimeRate * worker.overtimeHours);
-    });
-  }
+  void _rebuild() => setState(() {});
 
   void _addWorker() {
     setState(() {
@@ -107,17 +78,36 @@ class _WageCalculatorState extends State<WageCalculator> {
             child: ListView.builder(
               itemCount: workers.length,
               itemBuilder: (context, index) {
+                final worker = workers[index];
                 return WorkerInputCard(
-                  worker: workers[index],
-                  onCalculate: () => _calculateHours(index),
+                  key: ValueKey(worker.id),
+                  worker: worker,
+                  onStartChanged: (t) {
+                    worker.startTime = t;
+                    _rebuild();
+                  },
+                  onEndChanged: (t) {
+                    worker.endTime = t;
+                    _rebuild();
+                  },
+                  onRateChanged: (r) {
+                    worker.regularRate = r;
+                    _rebuild();
+                  },
+                  onOvertimeMultiplierChanged: (m) {
+                    worker.overtimeRate = m;
+                    _rebuild();
+                  },
                   onRemove: () => _removeWorker(index),
                 );
               },
             ),
           ),
-          ElevatedButton(
-            onPressed: _addWorker,
-            child: const Text('Add Worker'),
+          Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: _addWorker,
+              child: Text(AppLocalizations.of(context)!.addWorker),
+            ),
           ),
         ],
       ),
@@ -170,7 +160,28 @@ class WorkerInputCard extends StatelessWidget {
                 ),
                 IconButton(
                   icon: const Icon(Icons.remove_circle, color: Colors.red),
-                  onPressed: onRemove,
+                  onPressed: () async {
+                    final confirmed = await showDialog<bool>(
+                      context: context,
+                      builder: (dialogContext) => AlertDialog(
+                        title: const Text('Remove worker?'),
+                        content: const Text('This action cannot be undone.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(dialogContext).pop(false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(dialogContext).pop(true),
+                            child: const Text('Remove'),
+                          ),
+                        ],
+                      ),
+                    );
+                    if (confirmed == true) {
+                      onRemove();
+                    }
+                  },
                 ),
               ],
             ),
@@ -204,21 +215,31 @@ class WorkerInputCard extends StatelessWidget {
             const SizedBox(height: 8.0),
             TextFormField(
               decoration:
-                  const InputDecoration(labelText: 'Regular Rate (PKR)'),
+                  const InputDecoration(labelText: 'Regular Rate (PKR/hr)'),
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               initialValue: worker.regularRate.toString(),
               onChanged: (value) {
-                worker.regularRate = double.parse(value);
+                final parsed = double.tryParse(value);
+                if (parsed != null) {
+                  // Enforce positive regular rate
+                  worker.regularRate = parsed > 0 ? parsed : 0.01;
+                  onCalculate();
+                }
               },
             ),
             const SizedBox(height: 8.0),
             TextFormField(
               decoration:
-                  const InputDecoration(labelText: 'Overtime Rate Multiplier'),
+                  const InputDecoration(labelText: 'Overtime Multiplier (×)'),
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               initialValue: worker.overtimeRate.toString(),
               onChanged: (value) {
-                worker.overtimeRate = double.parse(value);
+                final parsed = double.tryParse(value);
+                if (parsed != null) {
+                  // Enforce minimum multiplier of 1.0
+                  worker.overtimeRate = parsed >= 1.0 ? parsed : 1.0;
+                  onCalculate();
+                }
               },
             ),
             const SizedBox(height: 16.0),
@@ -227,17 +248,22 @@ class WorkerInputCard extends StatelessWidget {
               child: const Text('Calculate Wage'),
             ),
             const SizedBox(height: 16.0),
-            Text(
-              'Total Wage: ${worker.totalWage.toStringAsFixed(2)} PKR',
-              style: const TextStyle(fontSize: 20.0),
+            Builder(
+              builder: (context) {
+                final currencyFormatter = NumberFormat.currency(symbol: 'PKR ', decimalDigits: 2);
+                return Text(
+                  'Total Wage: ${currencyFormatter.format(worker.totalWage)}',
+                  style: const TextStyle(fontSize: 20.0),
+                );
+              },
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Regular Hours: ${worker.regularHours} hrs',
+              'Regular Hours: ${worker.regularHours.toStringAsFixed(2)} hrs',
               style: const TextStyle(fontSize: 16.0),
             ),
             Text(
-              'Overtime Hours: ${worker.overtimeHours} hrs',
+              'Overtime Hours: ${worker.overtimeHours.toStringAsFixed(2)} hrs',
               style: const TextStyle(fontSize: 16.0),
             ),
           ],

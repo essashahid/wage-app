@@ -1,0 +1,20 @@
+{
+  "appTitle": "Wage Calculator",
+  "workerDetails": "Worker Details",
+  "removeWorkerTitle": "Remove worker?",
+  "removeWorkerMessage": "This action cannot be undone.",
+  "cancel": "Cancel",
+  "remove": "Remove",
+  "startTime": "Start Time",
+  "endTime": "End Time",
+  "regularRateLabel": "Regular Rate (per hour)",
+  "overtimeMultiplierLabel": "Overtime Multiplier (×)",
+  "addWorker": "Add Worker",
+  "totalWage": "Total Wage: {amount}",
+  "regularHours": "Regular Hours: {hours} hrs",
+  "overtimeHours": "Overtime Hours: {hours} hrs",
+  "positiveNumberError": "Enter a positive number",
+  "minMultiplierError": "Must be at least 1.0"
+}
+
+
