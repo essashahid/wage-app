@@ -13,6 +13,20 @@ Wage Calculator helps stitching units compute daily pay for one or more workers 
 
 <img src="docs/hero-unit.svg" alt="Stitching unit banner" />
 
+### Live motion preview
+Embed a short looping animation directly in the README. Add one (or both) files and it will autoplay below:
+
+1) `docs/gifs/stitching-3d.gif` (most reliable on GitHub)
+2) `docs/3d/stitching-3d.mp4` (higher quality; some browsers may not autoplay)
+
+<picture>
+  <source type="video/mp4" srcset="docs/3d/stitching-3d.mp4" />
+  <img src="docs/gifs/stitching-3d.gif" alt="3D stitching unit animation" />
+</picture>
+
+<!-- Prefer HTML5 video for autoplay (muted required); GitHub may not always autoplay videos in README. -->
+<video src="docs/3d/stitching-3d.mp4" autoplay loop muted playsinline style="width:100%; border-radius:12px;" />
+
 ## Stitching Unit Workflow (Animated Tour)
 
 Bring the story to life. Drop GIFs into `docs/gifs/` with the suggested names below and they’ll render here.
