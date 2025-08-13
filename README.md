@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/logo.svg" width="128" height="128" alt="Tailor Beard Logo" />
+
 # 🪡 Wage Calculator — A Tailor's Day at the Shop
 
 Calculate daily wages with regular and overtime hours across multiple platforms — told through the story of a tailor. ✂️🧵💸
